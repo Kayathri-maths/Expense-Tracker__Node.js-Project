@@ -8,7 +8,7 @@ const errorController = require('./controllers/error');
 
 const sequelize = require('./util/database');
 
-const Details = require('./models/User');
+const User = require('./models/User');
 
 const Expenses = require('./models/expense');
 
@@ -29,6 +29,10 @@ app.use(bodyParser.json({ extended: false}));
 app.use('/user',userRoutes);
 
 app.use('/expense',expenseRoutes);
+
+User.hasMany(Expenses);
+
+Expenses.belongsTo(User);
 
 app.use(errorController.get404);
 
