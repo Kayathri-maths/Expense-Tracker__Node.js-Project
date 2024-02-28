@@ -1,7 +1,7 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
+
 
 function isstringinvalid(str) {
   if (str == undefined || str.length === 0) {
@@ -11,7 +11,7 @@ function isstringinvalid(str) {
   }
 }
 
-exports.signUp = async (req, res, next) => {
+const signup = async (req, res, next) => {
   try {
 
     const name = req.body.name;
@@ -36,11 +36,11 @@ exports.signUp = async (req, res, next) => {
 
 };
 
-function generateAccessToken(id, name){
-  return jwt.sign( { userId: id , name: name} , process.env.TOKEN_SECRET)
+const generateAccessToken = (id, name, ispremiumuser) =>{
+  return jwt.sign( { userId: id , name: name, ispremiumuser} , process.env.TOKEN_SECRET)
 }
 
-exports.login = async (req, res, next) => {
+const login = async (req, res, next) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -54,7 +54,7 @@ exports.login = async (req, res, next) => {
           throw new Error('Something went wrong');
         }
         if (result === true) {
-           return res.status(200).json({ success: true, message: "User logged in successfully" , token: generateAccessToken(user[0].id,user[0].name)});
+           return res.status(200).json({ success: true, message: "User logged in successfully" , token: generateAccessToken(user[0].id,user[0].name, user[0].ispremiumuser)});
         } else {
           return res.status(400).json({ success: false, message: "Password is incorrect" });
         }
@@ -65,4 +65,10 @@ exports.login = async (req, res, next) => {
   } catch (err) {
     res.status(500).json({ success: false, message: err });
   }
+}
+
+module.exports = {
+  signup,
+  login,
+  generateAccessToken
 }

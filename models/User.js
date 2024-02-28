@@ -26,8 +26,8 @@ const SignUp = sequelize.define('user', {
         type: Sequelize.STRING,
         unique: true,
         allowNull: false
-      }
-    
+      },
+      ispremiumuser: Sequelize.BOOLEAN
 })
 
 module.exports = SignUp;

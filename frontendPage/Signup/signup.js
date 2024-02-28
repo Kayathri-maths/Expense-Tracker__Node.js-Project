@@ -15,6 +15,7 @@ async function signup(event) {
             throw new Error('Failed to login');
         }
     } catch (error) {
+        console.log(error);
         document.body.innerHTML += `<div style="color:red">${error}</div>`;
     }
 }
