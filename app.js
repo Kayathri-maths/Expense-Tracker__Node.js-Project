@@ -45,7 +45,7 @@ Order.belongsTo(User);
 app.use(errorController.get404);
 
 sequelize.sync()
-  .then(res =>{
+  .then(() =>{
    app.listen(3000);
 })
  .catch( err => console.log(err));

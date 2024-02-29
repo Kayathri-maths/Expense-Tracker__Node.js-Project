@@ -96,8 +96,9 @@ function showLeaderBoard(){
 
        var leaderBoardElement = document.getElementById('leader-board');
        leaderBoardElement.innerHTML = '<h1>Leader Board </h1>';
+       
        userLeaderBoardArr.data.forEach((userlist) => {
-           leaderBoardElement.innerHTML += `<li>Name - ${userlist.name} Total Expenses - ${userlist.total_cost} </li>`
+           leaderBoardElement.innerHTML += `<li>Name - ${userlist.name} Total Expenses - ${userlist.total_cost || 0} </li>`
        })
    }
     document.getElementById("leader-board").appendChild(inputElement);
