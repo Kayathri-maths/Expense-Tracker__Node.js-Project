@@ -33,7 +33,7 @@ function parseJwt (token) {
     return JSON.parse(jsonPayload);
 }
 
-async function getAllExpenses() {
+window.addEventListener("DOMContentLoaded",   async () => {
     try {
         const token = localStorage.getItem('token');
         const decodeToken = parseJwt(token);
@@ -48,16 +48,16 @@ async function getAllExpenses() {
         }
         const response = await axios.get("http://localhost:3000/expense/get-expenses",{ headers: { "Authorization" : token}});
         console.log(response);
-        for (let i = 0; i < response.data.expenses.length; i++) {
-            showOnUserScreen(response.data.expenses[i])
-        }
+        response.data.expenses.forEach((expense) => {
+            showOnUserScreen(expense);
+        })
     }
     catch (error) {
         console.log(JSON.stringify(error));
         document.body.innerHTML += `<div style="color:red">${error.message}</div>`;
     }
-}
-window.addEventListener("DOMContentLoaded", getAllExpenses);
+})
+
 
 function showOnUserScreen(obj) {
     document.getElementById('expenseamount').value = '';
@@ -98,10 +98,10 @@ function showLeaderBoard(){
        leaderBoardElement.innerHTML = '<h1>Leader Board </h1>';
        
        userLeaderBoardArr.data.forEach((userlist) => {
-           leaderBoardElement.innerHTML += `<li>Name - ${userlist.name} Total Expenses - ${userlist.total_cost || 0} </li>`
+           leaderBoardElement.innerHTML += `<li>Name - ${userlist.name} Total Expenses - ${userlist.totalExpenses} </li>`
        })
    }
-    document.getElementById("leader-board").appendChild(inputElement);
+    document.getElementById("premium-user").appendChild(inputElement);
 }
 
 function removeItemfromScreen(ItemId) {

@@ -27,7 +27,11 @@ const SignUp = sequelize.define('user', {
         unique: true,
         allowNull: false
       },
-      ispremiumuser: Sequelize.BOOLEAN
+      ispremiumuser: Sequelize.BOOLEAN,
+      totalExpenses: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      }
 })
 
 module.exports = SignUp;

@@ -1,4 +1,5 @@
 const Expense = require('../models/expense');
+const User = require('../models/User');
 
 exports.addExpense = async (req, res, next) => {
 
@@ -9,6 +10,11 @@ exports.addExpense = async (req, res, next) => {
             return res.status(400).json({ success: false, message: "Parameters missing" });
         }
         const expense = await Expense.create({ expenseamount, description, category, userId: req.user.id });
+        const totalExpense = Number(req.user.totalExpenses)+Number(expenseamount);
+        console.log(totalExpense);
+        await User.update({
+            totalExpenses: totalExpense
+        }, { where: {id: req.user.id}});
         res.status(201).json({ expense, success: true })
     } catch (err) {
         res.status(500).json({ success: false, error: err });
