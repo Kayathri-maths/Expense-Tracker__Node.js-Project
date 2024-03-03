@@ -89,6 +89,7 @@ function showLeaderBoard(){
     inputElement.type = "submit";
     inputElement.value = 'Show Leaderboard';
    // inputElement.style.display = "block"
+   document.getElementById('download-expenses').style.display = 'block';
     inputElement.onclick = async () => {
        const token = localStorage.getItem('token');
        const userLeaderBoardArr = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: {"Authorization": token}})
@@ -141,3 +142,23 @@ document.getElementById('rzp-button1').onclick = async function (e) {
   });
 }
 
+ async function expensedownload(){
+    try{
+     const token = localStorage.getItem('token');
+     const response = await axios.get('http://localhost:3000/user/download',{headers: {"Authorization" : token}})
+      
+     if (response.status===201){
+        var a = document.createElement("a");
+        a.href = response.data.fileUrl;
+        a.download ='myexpense.csv';
+        a.click();
+        alert('Successfully downloaded the expenses file');
+     }  else {
+        throw new Error(response.data.message)
+     }
+
+    }  catch(err){
+        console.log(err);
+        document.body.innerHTML += `<div style="color:red">${err.message}</div>`;
+    }
+}
