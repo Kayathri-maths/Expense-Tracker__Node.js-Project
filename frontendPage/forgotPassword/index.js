@@ -11,7 +11,7 @@ async function forgotpassword(event) {
         } else {
             throw new Error('Something went wrong')
         }
-    } catch {
+    } catch(err) {
         document.body.innerHTML += `<div style="color:red;">${err} <div>`;
     }
 }
