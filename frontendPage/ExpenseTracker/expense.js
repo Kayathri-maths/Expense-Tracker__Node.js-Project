@@ -147,12 +147,12 @@ document.getElementById('rzp-button1').onclick = async function (e) {
      const token = localStorage.getItem('token');
      const response = await axios.get('http://localhost:3000/user/download',{headers: {"Authorization" : token}})
       
-     if (response.status===201){
+     if (response.status===200){
         var a = document.createElement("a");
         a.href = response.data.fileUrl;
         a.download ='myexpense.csv';
         a.click();
-        alert('Successfully downloaded the expenses file');
+        
      }  else {
         throw new Error(response.data.message)
      }

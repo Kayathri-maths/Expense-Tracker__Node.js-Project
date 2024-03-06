@@ -1,8 +1,11 @@
 const Expense = require('../models/expense');
 const User = require('../models/User');
 const sequelize = require('../util/database');
+const UserServices = require('../services/userservices');
+const S3Service = require('../services/S3services');
+const DownloadFile = require('../models/downloadfileurl');
 
-exports.addExpense = async (req, res, next) => {
+const addExpense = async (req, res, next) => {
     const transaction = await sequelize.transaction();
     try {
         const { expenseamount, description, category } = req.body;
@@ -28,7 +31,7 @@ exports.addExpense = async (req, res, next) => {
 
 }
 
-exports.getexpenses = async (req, res, next) => {
+const getexpenses = async (req, res, next) => {
     try {
         const expenses = await Expense.findAll({ where: { userId: req.user.id } });
         res.status(200).json({ expenses, success: true });
@@ -39,7 +42,7 @@ exports.getexpenses = async (req, res, next) => {
     }
 }
 
-exports.deleteExpense = async (req, res, next) => {
+const deleteExpense = async (req, res, next) => {
     const transaction = await sequelize.transaction();
     try {
         if (req.params.id == 'undefined') {
@@ -69,4 +72,35 @@ exports.deleteExpense = async (req, res, next) => {
         console.log(error);
         res.status(500).json({ message: "failed", success: false });
     }
+}
+
+
+const downloadexpenses = async (req, res, next) => {
+    try{
+      //  const expenses = await req.user.getExpenses();
+      const expenses = await UserServices.getExpenses(req);
+     console.log(expenses);
+     const stringifiedExpenses = JSON.stringify(expenses);
+     const userId = req.user.id;
+     const filename = `Expense${userId}/${new Date()}.txt`;
+     const fileUrl = await S3Service.uploadToS3(stringifiedExpenses, filename);
+     console.log('fileUrl',fileUrl)
+
+     await DownloadFile.create({
+        fileUrl: fileUrl,
+        userId: userId
+     })
+     res.status(200).json({ fileUrl, success: true });
+    }  catch(err) {
+        console.log(err);
+        return res.status(500).json({ fileUrl: '', error: err, success: false})
+    }
+   
+}
+
+module.exports = {
+    addExpense,
+    getexpenses,
+    deleteExpense,
+    downloadexpenses
 }
