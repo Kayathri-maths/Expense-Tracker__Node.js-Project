@@ -5,18 +5,19 @@
   font-family: "Poppins", sans-serif;
 }
 
-body {
-  background-color: #d5e7fd;
+body{
+  background-color: rgba(13, 180, 209, 0.904);
 }
 
 .wrapper {
   width: 330px;
   padding: 2rem 1rem;
-  margin: 50px auto;
-  background-color: #fff;
+  margin: 75px auto;
+  background-color: white;;
   text-align: center;
   border-radius: 10px;
   box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 h1 {
@@ -62,6 +63,7 @@ button:hover {
 }
 .btn1:hover {
   background-color: white;
+  text-decoration: underline;
 }
 
 input:focus {
@@ -77,4 +79,11 @@ input:focus {
 .member a {
   color: rgb(17, 107, 143);
   text-decoration: none;
+}
+
+@media screen and (max-width: 400px){
+  .wrapper {
+ width: 90%;
+  padding: 15px 10px;
+  }
 }
