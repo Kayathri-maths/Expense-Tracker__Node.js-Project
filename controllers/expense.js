@@ -36,7 +36,8 @@ const addExpense = async (req, res, next) => {
 const getexpenses = async (req, res, next) => {
     try {
         const page = +req.query.page || 1; // Get the page number from the query parameters
-      const itemsPerPage = 10; // Number of expenses per page
+      let itemsPerPage = +req.query.Rows || 10; // Number of expenses per page
+    
       const totalExpenses=await req.user.countExpenses();
       const expenses = await Expense.findAll({
         where: {

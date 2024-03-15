@@ -55,13 +55,19 @@ window.addEventListener("DOMContentLoaded", async () => {
         console.log(decodeToken);
 
         const ispremiumuser = decodeToken.ispremiumuser;
+        const RowsperPage = localStorage.getItem('RowsperPage');
+        let Rows = 10;
+        if(RowsperPage){
+          SelectRows.value=RowsperPage
+           Rows = Number(RowsperPage);
+        }
 
         if (ispremiumuser) {
             showPremiumUserMessage();
             //  showLeaderBoard();
             console.log('ispremiumuser>>>', ispremiumuser);
         }
-        const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${page}`, { headers: { "Authorization": token } });
+        const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${page}&Rows=${Rows}`, { headers: { "Authorization": token } });
         console.log(response);
         response.data.result.forEach((expense) => {
             showOnUserScreen(expense);
@@ -204,9 +210,7 @@ async function expensedownload() {
             a.href = response.data.fileUrl;
             a.download = 'myexpense.csv';
             a.click();
-            setTimeout(function () {
-                alert('Expenses Downloaded successfully');
-            }, 1000);
+            alert('Expenses Downloading started');
 
         } else {
             throw new Error(response.data.message)
@@ -252,14 +256,11 @@ function showpagination({
 
   async function getExpenses(pageNo) {
     try {
-    //  const Downloadbtn = document.getElementById('downloaddata');
       const token = localStorage.getItem('token');
-    //   const Premium_user = document.getElementById('premiumsuccessful');
-    //   const premium_btn = document.getElementById('razorpay');
-    //   const Leaderboardbtn = document.getElementById('leaderboardbtn');
+      const Rows= localStorage.getItem('RowsperPage');
   
       // Use the page parameter in the request URL
-      const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${pageNo}`, {
+      const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
         headers: { Authorization: token }
       });
        let parentNode = document.getElementById("expense-table-body");
@@ -273,7 +274,11 @@ function showpagination({
       console.error(error);
     }
   }
-
+  const SelectRows = document.getElementById('rowsperpage');
+  SelectRows.onchange=async()=>{
+    localStorage.setItem('RowsperPage',SelectRows.value);
+    window.location.href='../ExpenseTracker/index.html'
+  }
 function logout() {
     localStorage.removeItem('token'); // Remove the token from local storage
     window.location.href = '../Login/login.html'; // Redirect to the login page
