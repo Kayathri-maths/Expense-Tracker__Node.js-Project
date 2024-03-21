@@ -1,12 +1,18 @@
 const path = require('path');
 
+const fs = require('fs');
+
 const express = require('express');
 
 const bodyParser = require('body-parser');
 
 const cors = require('cors');
 
+const helmet = require('helmet');
+
 const app = express();
+
+const morgan = require('morgan');
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -28,9 +34,18 @@ const purchaseRoutes = require('./routes/purchase');
 const premiumRoutes = require('./routes/premiumFeacher');
 const resetPasswordRoutes = require('./routes/resetPassword')
 
+const accessLogStream = fs.createWriteStream(
+   path.join(__dirname,'accesslog'),
+   { flags: 'a' }
+);
+
 app.use(cors());
 
 app.use(express.json());
+
+app.use(helmet());
+
+app.use(morgan('combined',{stream: accessLogStream}))
 
 app.use(bodyParser.json({ extended: false}));
 
@@ -49,11 +64,14 @@ Order.belongsTo(User);
 User.hasMany(ForgotPassword);
 ForgotPassword.belongsTo(User);
 
+User.hasMany(FileUrls);
+FileUrls.belongsTo(User);
+
 app.use(errorController.get404);
 
 sequelize.sync()
   .then(() =>{
-   app.listen(3000);
+   app.listen( process.env.PORT || 3000);
 })
  .catch( err => console.log(err));
 

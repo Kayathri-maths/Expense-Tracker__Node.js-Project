@@ -94,9 +94,7 @@ function showOnUserScreen(obj) {
     <td > ${obj.expenseamount}</td>
     <td >${obj.description}</td>
     <td >${obj.category}</td>
-   <td >
-    <button onclick="editexpense('${obj.id}','${obj.expenseamount}','${obj.description}','${obj.category}')" class="edit-btn"  ><i class="fa-solid fa-pen-to-square"></i></button>
-  
+   <td >  
   <button onclick="deleteItem('${obj.id}')" class="delete-btn" ><i class="fa-solid fa-trash-can"></i></button>
   
   </td>
@@ -120,13 +118,6 @@ async function deleteItem(expenseid) {
 }
 
 async function showLeaderBoard() {
-    // const inputElement = document.createElement("input");
-    // inputElement.type = "submit";
-    // inputElement.value = 'Show Leaderboard';
-    // inputElement.style.display = "block"
-    //    document.getElementById('download-expenses').style.display = 'block';
-    //  document.querySelector('h4').style.display='block';
-    //  document.getElementById("leader-board").style.display = 'block';
     const token = localStorage.getItem('token');
     const isPremiumUser = JSON.parse(atob(token.split('.')[1])).ispremiumuser;
     if (!isPremiumUser) {
@@ -136,9 +127,6 @@ async function showLeaderBoard() {
     const userLeaderBoardArr = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { "Authorization": token } })
     console.log(userLeaderBoardArr);
 
-    //    var leaderBoardElement = document.getElementById('leader-board');
-    //    leaderBoardElement.innerHTML = '<h1>Leader Board </h1>';
-
     const leaderBoardElement = document.getElementById('leader-board-body');
     leaderBoardElement.innerHTML = '';
 
@@ -146,8 +134,6 @@ async function showLeaderBoard() {
         document.querySelector('h4').style.display = 'block';
         document.getElementById("leader-board").style.display = 'block';
         var leaderBoardElement = document.getElementById('leader-board-body');
-        // leaderBoardElement.innerHTML = '<h1>Leader Board </h1>';
-        //    leaderBoardElement.innerHTML += `<li>Name - ${userlist.name} Total Expenses - ${userlist.totalExpenses} </li>`
 
         leaderBoardElement.innerHTML += `
        <tr >
@@ -155,8 +141,6 @@ async function showLeaderBoard() {
        <td > ${userlist.totalExpenses}</td>
        </tr>`
     })
-
-    //  document.getElementById("premium-user").appendChild(inputElement);
 }
 
 function removeItemfromScreen(ItemId) {
@@ -210,7 +194,10 @@ async function expensedownload() {
             a.href = response.data.fileUrl;
             a.download = 'myexpense.csv';
             a.click();
-            alert('Expenses Downloading started');
+            setTimeout( () => {
+                alert('Expenses Downloading started');
+            }, 500)
+            
 
         } else {
             throw new Error(response.data.message)
@@ -283,3 +270,4 @@ function logout() {
     localStorage.removeItem('token'); // Remove the token from local storage
     window.location.href = '../Login/login.html'; // Redirect to the login page
 }
+

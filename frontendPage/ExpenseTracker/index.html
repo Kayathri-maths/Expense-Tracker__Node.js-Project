@@ -5,13 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Expenses</title>
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- Google Fonts -->
-  <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet" /> -->
-  <!-- Stylesheet -->
   <link rel="stylesheet" href="style.css" />
-
 </head>
 
 <body>
@@ -31,7 +26,6 @@
       <i class="fa-solid fa-bars" id="bar"></i>
     </div>
   </nav>
-  <!-- <h1 class="heading"> Expenses Tracker</h1> -->
   <div class="container">
     <div class="form_wrapper">
       <form onsubmit="addExpenses(event)">
@@ -47,13 +41,15 @@
           <label for="category">Choose a category:</label>
           <select name="category" id="category">
             <option value="selectcategory">Select Category</option>
-            <option value="fuel">fuel</option>
-            <option value="food">food</option>
-            <option value="movie">movie</option>
-            <option value="electricity">electricity</option>
+            <option value="fuel">Fuel</option>
+            <option value="food">Food</option>
+            <option value="movie">Movie</option>
+            <option value="electricity">Electricity</option>
             <option value="onVaction">On Vacation</option>
-            <option value="diesel">diesel</option>
-            <option value="toffe">toffe</option>
+            <option value="education">Books & Education</option>
+            <option value="fashion">Fashion & Beauty</option>
+            <option value="emis">Bills & EMI's</option>
+            <option value="others">Others</option>
           </select>
         </div>
         <button>Add Expenses</button>
@@ -72,27 +68,20 @@
         </thead>
         <tbody id="expense-table-body"> </tbody>
       </table>
-      <div>Rows per page: 
-         <select name="rowsperpage" id="rowsperpage">
-           <option>5</option>
-           <option>10</option>
-           <option>15</option>
-           <option>20</option>
-      
-      </select>
-    </div>
+      <div class="rows">Rows per page:
+        <select name="rowsperpage" id="rowsperpage">
+          <option>5</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+
+        </select>
+      </div>
       <div class="pagination"></div>
     </div>
   </div>
-  <!-- <div>
-            <button id="rzp-button1" style="display:block;">Buy Premium</button>
-            <button onclick="expensedownload()" id="download-expenses" style="display:none">Download expensesFile</button>
-        </div> -->
 
- <!-- <div id="messsage"></div> -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-  <!-- <h1>Expenses</h1>
-        <ul id="listOfExpenses"></ul> -->
   <h4 style="display: none;">Leader Board</h4>
   <table id="leader-board" style="display: none;">
     <thead>
@@ -105,8 +94,8 @@
     <tbody id="leader-board-body">
     </tbody>
   </table>
- 
-  
+
+
 
   <script src="./expense.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
