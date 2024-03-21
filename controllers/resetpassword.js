@@ -62,19 +62,19 @@ const resetpassword = async (req, res) => {
     if (ForgotPassword) {
         await forgotPassword.update({ active: false }, { where: { id: ForgotPassword.id } });
         res.status(200).send(
-            `<html>
-                                    <script>
-                                        function formsubmitted(e){
-                                            e.preventDefault();
-                                            console.log('called')
-                                        }
-                                    </script>
+                                `<html>
+                                        <script>
+                                            function formsubmitted(e){
+                                                e.preventDefault();
+                                                console.log('called')
+                                            }
+                                        </script>
 
-                                    <form action="/password/updatepassword/${id}" method="get">
-                                        <label for="newpassword">Enter New password</label>
-                                        <input name="newpassword" type="password" required></input>
-                                        <button>reset password</button>
-                                    </form>
+                                        <form action="/password/updatepassword/${id}" method="get">
+                                            <label for="newpassword">Enter New password</label>
+                                            <input name="newpassword" type="password" required></input>
+                                            <button>reset password</button>
+                                        </form>
                                 </html>`
         )
         res.end();

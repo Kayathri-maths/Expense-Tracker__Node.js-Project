@@ -40,14 +40,16 @@ ul li a:hover {
   color: rgb(35, 183, 241);
   text-decoration: underline;
 }
-#premium-user{
+
+#premium-user {
   text-decoration: underline;
   margin-left: 15px;
 }
 
 #premium-user:hover {
-     color: rgb(35, 183, 241);
+  color: rgb(35, 183, 241);
 }
+
 ul li button {
   margin-inline: 20px;
   margin-right: 11px;
@@ -101,6 +103,7 @@ ul li button:hover {
 h1.heading {
   text-align: center;
 }
+
 label {
   display: flex;
   margin-bottom: 8px;
@@ -110,16 +113,17 @@ label {
 }
 
 
- .container {
+.container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   align-items: flex-start;
   padding-left: 20px;
   margin: 0;
   width: 100%;
   gap: 60px;
 }
+
 .form_wrapper {
   display: flex;
   gap: 30px;
@@ -136,6 +140,7 @@ label {
   flex-direction: column;
   gap: 10px;
 }
+
 .form_wrapper form input {
   width: auto;
   padding: 5px 0px;
@@ -147,7 +152,7 @@ label {
   border-radius: 3px;
 }
 
-.form_wrapper form  select {
+.form_wrapper form select {
   width: 195px;
   padding: 5px 0px;
   margin-left: 55px;
@@ -178,27 +183,27 @@ td {
   font-size: 18px;
 }
 
-th{
-   background-color: rgb(127, 208, 255);
+th {
+  background-color: rgb(127, 208, 255);
 }
 
 #product-table thead th {
   display: flex;
-font-size: 18px;
-width: 60%;
-font-weight: lighter;
+  font-size: 18px;
+  width: 60%;
+  font-weight: lighter;
 }
 
-.delete-btn{
+.delete-btn {
   padding: 3px 5px;
   background-color: transparent;
   margin-left: 5px;
   cursor: pointer;
 }
 
-h4{
+h4 {
   margin-left: 100px;
-  width: 300px ;
+  width: 300px;
   background-color: rgb(25, 25, 61);
   color: #fff;
   text-align: center;
@@ -206,13 +211,15 @@ h4{
   border: 1px solid #fff;
   margin-top: 10px;
 }
+
 #leader-board {
   margin: 0 0;
   margin-bottom: 10px;
   padding-left: 100px;
 }
+
 #leader-board th {
-      padding: 10px  28px;
+  padding: 10px 28px;
 }
 
 .pagination {
@@ -227,12 +234,12 @@ h4{
   background-color: #f0f0f0;
   cursor: pointer;
   border-radius: 40%;
-   border: none;
+  border: none;
 }
 
 .pagination button.current-page {
   font-weight: bold;
-  background-color: rgba(3, 62, 255, 0.788) ;
+  background-color: rgba(3, 62, 255, 0.788);
   color: #fff;
 }
 
@@ -254,7 +261,7 @@ h4{
     display: flex;
     cursor: pointer;
   }
-  
+
   .showData {
     display: flex;
     flex-direction: column;
@@ -272,11 +279,13 @@ h4{
   }
 }
 
- @media only screen and (max-width:700px){
+@media only screen and (max-width:700px) {
   nav {
-    background-color: rgb(25, 25, 61); ;
+    background-color: rgb(25, 25, 61);
+    ;
     width: 150%;
   }
+
   .pagination {
     width: 100%;
     display: flex;
@@ -284,9 +293,10 @@ h4{
     margin-left: 300px;
     margin-top: -20px;
   }
-} 
-@media only screen and (max-width:340px){
-  #product_table{
+}
+
+@media only screen and (max-width:340px) {
+  #product_table {
     padding-left: 60px;
   }
 
@@ -296,19 +306,21 @@ h4{
     justify-content: flex-end;
     margin-left: 300px;
     margin-top: -20px;
-    
+
   }
+
   .product_table_and_result {
-    width: calc(100% - 20px); 
-    margin-right: 20px; 
+    width: calc(100% - 20px);
+    margin-right: 20px;
   }
 }
 
-@media only screen and (max-width:400px){
+@media only screen and (max-width:400px) {
   #leader-board th {
-    padding: 10px  30px;
-}
-h4{
-  width: 260px;
-}
+    padding: 10px 30px;
+  }
+
+  h4 {
+    width: 260px;
+  }
 }

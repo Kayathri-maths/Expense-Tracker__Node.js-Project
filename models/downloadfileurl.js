@@ -13,6 +13,6 @@ const fileUrl = sequelize.define('downloadfile' ,{
      type: Sequelize.STRING,
      allowNull: false
    }
-})
+});
 
 module.exports =  fileUrl;

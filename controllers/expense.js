@@ -4,7 +4,6 @@ const sequelize = require('../util/database');
 const UserServices = require('../services/userservices');
 const S3Service = require('../services/S3services');
 const DownloadFile = require('../models/downloadfileurl');
-const AWS = require('aws-sdk');
 const Order = require('../models/orders');
 
 const addExpense = async (req, res, next) => {

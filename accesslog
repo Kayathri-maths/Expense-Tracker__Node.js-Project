@@ -18,3 +18,5 @@
 ::1 - - [18/Mar/2024:05:16:34 +0000] "POST /user/signup HTTP/1.1" 201 43 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [18/Mar/2024:05:16:42 +0000] "POST /user/login HTTP/1.1" 200 236 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 ::1 - - [18/Mar/2024:05:16:45 +0000] "GET /expense/get-expenses?page=1&Rows=5 HTTP/1.1" 200 116 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
+
+

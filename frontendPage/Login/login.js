@@ -1,5 +1,5 @@
 async function login(event) {
-    try{
+    try {
         event.preventDefault();
         const loginDetails = {
             email: event.target.email.value,
@@ -15,12 +15,12 @@ async function login(event) {
         } else {
             throw new Error(response.data.message);
         }
-    }   catch (err) {
+    } catch (err) {
         console.log(JSON.stringify(err));
         document.body.innerHTML += `<div style="color:red">${err.message}</div>`;
     }
 }
 
- function forgotPassword(){
-    window.location.href='../forgotPassword/index.html'
+function forgotPassword() {
+    window.location.href = '../forgotPassword/index.html'
 }

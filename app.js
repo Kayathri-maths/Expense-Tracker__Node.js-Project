@@ -69,6 +69,7 @@ FileUrls.belongsTo(User);
 
 app.use(errorController.get404);
 
+
 sequelize.sync()
   .then(() =>{
    app.listen( process.env.PORT || 3000);

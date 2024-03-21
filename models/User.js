@@ -32,6 +32,6 @@ const SignUp = sequelize.define('user', {
         type: Sequelize.INTEGER,
         defaultValue: 0
       }
-})
+});
 
 module.exports = SignUp;

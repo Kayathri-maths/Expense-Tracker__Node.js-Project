@@ -1,4 +1,5 @@
 async function signup(event) {
+    
     try {
         event.preventDefault();
         const signupDetails = {

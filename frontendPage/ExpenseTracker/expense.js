@@ -57,9 +57,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         const ispremiumuser = decodeToken.ispremiumuser;
         const RowsperPage = localStorage.getItem('RowsperPage');
         let Rows = 10;
-        if(RowsperPage){
-          SelectRows.value=RowsperPage
-           Rows = Number(RowsperPage);
+        if (RowsperPage) {
+            SelectRows.value = RowsperPage
+            Rows = Number(RowsperPage);
         }
 
         if (ispremiumuser) {
@@ -194,10 +194,10 @@ async function expensedownload() {
             a.href = response.data.fileUrl;
             a.download = 'myexpense.csv';
             a.click();
-            setTimeout( () => {
+            setTimeout(() => {
                 alert('Expenses Downloading started');
             }, 500)
-            
+
 
         } else {
             throw new Error(response.data.message)
@@ -216,56 +216,56 @@ function showpagination({
     hasPreviousPage,
     previousPage,
     lastPage
-  }) {
+}) {
     const pagination = document.querySelector('.pagination');
     pagination.innerHTML = '';
-  
+
     if (hasPreviousPage) {
-      const previousBtn = document.createElement('button');
-      previousBtn.innerHTML = previousPage;
-      previousBtn.addEventListener('click', () => getExpenses(previousPage));
-      pagination.appendChild(previousBtn);
+        const previousBtn = document.createElement('button');
+        previousBtn.innerHTML = previousPage;
+        previousBtn.addEventListener('click', () => getExpenses(previousPage));
+        pagination.appendChild(previousBtn);
     }
-  
+
     const currentBtn = document.createElement('button');
     currentBtn.innerHTML = `<h3>${currentPage}</h3>`;
     currentBtn.classList.add('current-page');
     currentBtn.addEventListener('click', () => getExpenses(currentPage));
     pagination.appendChild(currentBtn);
-  
-    if (hasNextPage) {
-      const nextBtn = document.createElement('button');
-      nextBtn.innerHTML = nextPage;
-      nextBtn.addEventListener('click', () => getExpenses(nextPage));
-      pagination.appendChild(nextBtn);
-    }
-  }
 
-  async function getExpenses(pageNo) {
+    if (hasNextPage) {
+        const nextBtn = document.createElement('button');
+        nextBtn.innerHTML = nextPage;
+        nextBtn.addEventListener('click', () => getExpenses(nextPage));
+        pagination.appendChild(nextBtn);
+    }
+}
+
+async function getExpenses(pageNo) {
     try {
-      const token = localStorage.getItem('token');
-      const Rows= localStorage.getItem('RowsperPage');
-  
-      // Use the page parameter in the request URL
-      const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
-        headers: { Authorization: token }
-      });
-       let parentNode = document.getElementById("expense-table-body");
-       parentNode.innerHTML='';
-      for (let i = 0; i < response.data.result.length; i++) {
-        showOnUserScreen(response.data.result[i]);
-      }
-      showpagination(response.data); 
+        const token = localStorage.getItem('token');
+        const Rows = localStorage.getItem('RowsperPage');
+
+        // Use the page parameter in the request URL
+        const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
+            headers: { Authorization: token }
+        });
+        let parentNode = document.getElementById("expense-table-body");
+        parentNode.innerHTML = '';
+        for (let i = 0; i < response.data.result.length; i++) {
+            showOnUserScreen(response.data.result[i]);
+        }
+        showpagination(response.data);
 
     } catch (error) {
-      console.error(error);
+        console.error(error);
     }
-  }
-  const SelectRows = document.getElementById('rowsperpage');
-  SelectRows.onchange=async()=>{
-    localStorage.setItem('RowsperPage',SelectRows.value);
-    window.location.href='../ExpenseTracker/index.html'
-  }
+}
+const SelectRows = document.getElementById('rowsperpage');
+SelectRows.onchange = async () => {
+    localStorage.setItem('RowsperPage', SelectRows.value);
+    window.location.href = '../ExpenseTracker/index.html'
+}
 function logout() {
     localStorage.removeItem('token'); // Remove the token from local storage
     window.location.href = '../Login/login.html'; // Redirect to the login page
