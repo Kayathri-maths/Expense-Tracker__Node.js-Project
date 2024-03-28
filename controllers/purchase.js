@@ -3,7 +3,7 @@ const Order = require('../models/orders');
 const userController = require('./user');
 
 
-exports.purchasepremium = async (req, res, next) => {
+const purchasepremium = async (req, res, next) => {
   try {
    var rzp = new Razorpay({
       key_id: process.env.RAZORPAY_KEY_ID,
@@ -28,10 +28,10 @@ exports.purchasepremium = async (req, res, next) => {
   }
 }
 
-exports.updateTransactionStatus = async (req, res, next) => {
+const updateTransactionStatus = async (req, res, next) => {
    try{
    const userId = req.user.id;
-    const {payment_id, order_id} = req.body;;
+    const {payment_id, order_id} = req.body;
     const order = await Order.findOne({where: {orderid: order_id}})
     const promise1 = order.update({ paymentid: payment_id, status: 'SUCCESSFUL'})
     const promise2 = req.user.update({ ispremiumuser: true});
@@ -47,4 +47,9 @@ exports.updateTransactionStatus = async (req, res, next) => {
         console.log(err);
         res.status(403).json({ error:err, message: "something went wrong"})
    }
+}
+
+module.exports = {
+  purchasepremium,
+  updateTransactionStatus
 }

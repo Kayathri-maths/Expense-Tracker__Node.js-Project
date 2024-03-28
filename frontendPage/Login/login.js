@@ -1,4 +1,4 @@
-async function login(event) {
+document.getElementById('loginForm').onsubmit = async function login(event) {
     try {
         event.preventDefault();
         const loginDetails = {
@@ -6,7 +6,7 @@ async function login(event) {
             password: event.target.password.value
         }
         console.log(loginDetails);
-        const response = await axios.post('http://localhost:3000/user/login', loginDetails);
+        const response = await axios.post('http://13.48.123.78:3000/user/login', loginDetails);
         if (response.status === 200) {
             alert(response.data.message);
             console.log(response.data);

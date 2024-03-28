@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", function() {
+    const signupForm = document.getElementById("forgotPasswordForm");
+    signupForm.addEventListener("submit", forgotpassword);
+});
 async function forgotpassword(event) {
     try {
         event.preventDefault();
@@ -5,7 +9,7 @@ async function forgotpassword(event) {
             email: event.target.email.value
         }
         console.log(userDetails);
-        const response = await axios.post('http://localhost:3000/password/forgotpassword', userDetails);
+        const response = await axios.post('http://13.48.123.78:3000/password/forgotpassword', userDetails);
         if (response.status === 202) {
             document.body.innerHTML += '<div style="color:red;">Mail Successfuly sent <div>'
         } else {

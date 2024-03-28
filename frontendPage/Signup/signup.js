@@ -1,5 +1,10 @@
-async function signup(event) {
-    
+// document.addEventListener("DOMContentLoaded", function() {
+//     const signupForm = document.getElementById("signUpForm");
+//     signupForm.addEventListener("submit", signup);
+// });
+
+document.getElementById('signUpForm').onsubmit = async function signup(event) {
+    console.log('signup>>>>>>>')
     try {
         event.preventDefault();
         const signupDetails = {
@@ -9,7 +14,7 @@ async function signup(event) {
             phonenumber: event.target.phonenumber.value
         }
         console.log(signupDetails);
-        const response = await axios.post('http://localhost:3000/user/signup', signupDetails);
+        const response = await axios.post('http://13.48.123.78:3000/user/signup', signupDetails);
         if (response.status === 201) {
             window.location.href = "../Login/login.html";
         } else {

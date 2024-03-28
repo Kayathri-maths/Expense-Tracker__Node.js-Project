@@ -1,16 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="Content-Security-Policy" content="script-src 'self'  cdnjs.cloudflare.com;"> -->
     <title>Login</title>
-    <link rel="stylesheet" href="../Signup/style.css">
+    <link  rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="wrapper" style="margin: 115px auto;">
         <h1>Login</h1>
-        <form onsubmit="login(event) ">
+        <form id="loginForm">
             <input type="email" name="email" placeholder="Email" required>
             <input type="password" name="password" placeholder="Password" required>
             <button>Login</button>
@@ -20,7 +22,7 @@
             Don't have an account? <a href="../Signup/signup.html">Sign Up</a>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.7/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.8/axios.min.js"></script>
     <script src="./login.js"></script>
 </body>
 

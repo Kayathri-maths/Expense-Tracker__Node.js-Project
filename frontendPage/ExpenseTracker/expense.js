@@ -12,7 +12,7 @@ icon.addEventListener("click", () => {
     }
 })
 
-async function addExpenses(event) {
+  document.getElementById('addExpenses').onsubmit = async function addExpenses(event) {
     try {
         event.preventDefault();
         const expenseamount = document.getElementById('expenseamount').value;
@@ -25,7 +25,7 @@ async function addExpenses(event) {
         };
         console.log(expenseItems);
         const token = localStorage.getItem('token');
-        const response = await axios.post('http://localhost:3000/expense/addexpense', expenseItems, { headers: { "Authorization": token } });
+        const response = await axios.post('http://13.48.123.78:3000/expense/addexpense', expenseItems, { headers: { "Authorization": token } });
         showOnUserScreen(response.data.expense);
         console.log(response.data.expense);
     } catch (err) {
@@ -67,7 +67,7 @@ window.addEventListener("DOMContentLoaded", async () => {
             //  showLeaderBoard();
             console.log('ispremiumuser>>>', ispremiumuser);
         }
-        const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${page}&Rows=${Rows}`, { headers: { "Authorization": token } });
+        const response = await axios.get(`http://13.48.123.78:3000/expense/get-expenses?page=${page}&Rows=${Rows}`, { headers: { "Authorization": token } });
         console.log(response);
         response.data.result.forEach((expense) => {
             showOnUserScreen(expense);
@@ -95,19 +95,17 @@ function showOnUserScreen(obj) {
     <td >${obj.description}</td>
     <td >${obj.category}</td>
    <td >  
-  <button onclick="deleteItem('${obj.id}')" class="delete-btn" ><i class="fa-solid fa-trash-can"></i></button>
-  
+   <button onclick="deleteItem('${obj.id}')" class="delete-btn" ><i class="fa-solid fa-trash-can"></i></button>
   </td>
  
   </tr>`
-
-    parentNode.innerHTML = parentNode.innerHTML + childNode;
-
+  parentNode.innerHTML = parentNode.innerHTML + childNode;
 }
+
 async function deleteItem(expenseid) {
     try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:3000/expense/delete-expense/${expenseid}`, { headers: { "Authorization": token } })
+        await axios.delete(`http://13.48.123.78:3000/expense/delete-expense/${expenseid}`, { headers: { "Authorization": token } })
         removeItemfromScreen(expenseid)
         console.log('Item details deleted');
     } catch (err) {
@@ -123,8 +121,8 @@ async function showLeaderBoard() {
     if (!isPremiumUser) {
         alert('You need to purchase premium membership to view the leaderboard.');
         return;
-    }
-    const userLeaderBoardArr = await axios.get('http://localhost:3000/premium/showLeaderBoard', { headers: { "Authorization": token } })
+    }//13.48.123.78
+    const userLeaderBoardArr = await axios.get('http://13.48.123.78:3000/premium/showLeaderBoard', { headers: { "Authorization": token } })
     console.log(userLeaderBoardArr);
 
     const leaderBoardElement = document.getElementById('leader-board-body');
@@ -152,14 +150,15 @@ function removeItemfromScreen(ItemId) {
 
 document.getElementById('rzp-button1').onclick = async function (e) {
     const token = localStorage.getItem('token');
-    const response = await axios.get('http://localhost:3000/purchase/premiummembership', { headers: { "Authorization": token } });
+    const response = await axios.get('http://13.48.123.78:3000/purchase/premiummembership', { headers: { "Authorization": token } });
     console.log(response);
     var options = {
         "key": response.data.key_id, // Enter the Key ID generated from the Dashboard
         "order_id": response.data.order.id,  // For one time payment
         //this handler function will handle the success payment
         "handler": async function (response) {
-            const res = await axios.post('http://localhost:3000/purchase/updatetransactionstatus', {
+            console.log(response);
+            const res = await axios.post('http://13.48.123.78:3000/purchase/updatetransactionstatus', {
                 order_id: options.order_id,
                 payment_id: response.razorpay_payment_id,
             }, { headers: { "Authorization": token } })
@@ -187,7 +186,7 @@ async function expensedownload() {
             alert('You need to purchase premium membership to download expenses');
             return;
         }
-        const response = await axios.get('http://localhost:3000/user/download', { headers: { "Authorization": token } })
+        const response = await axios.get('http://13.48.123.78:3000/user/download', { headers: { "Authorization": token } })
 
         if (response.status === 200) {
             var a = document.createElement("a");
@@ -247,7 +246,7 @@ async function getExpenses(pageNo) {
         const Rows = localStorage.getItem('RowsperPage');
 
         // Use the page parameter in the request URL
-        const response = await axios.get(`http://localhost:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
+        const response = await axios.get(`http://13.48.123.78:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
             headers: { Authorization: token }
         });
         let parentNode = document.getElementById("expense-table-body");
@@ -266,7 +265,7 @@ SelectRows.onchange = async () => {
     localStorage.setItem('RowsperPage', SelectRows.value);
     window.location.href = '../ExpenseTracker/index.html'
 }
-function logout() {
+ document.getElementById('logout').onclick = function logout() {
     localStorage.removeItem('token'); // Remove the token from local storage
     window.location.href = '../Login/login.html'; // Redirect to the login page
 }
