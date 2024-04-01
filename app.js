@@ -40,7 +40,7 @@ app.use('/password', resetPasswordRoutes);
 app.use((req, res) => {
    console.log('url>>>>>>>>',req.url) 
    res.sendFile(path.join(__dirname,'frontendPage',req.url))
-   console.log('after...url',req.url)
+   
 });
 
 // Associations
