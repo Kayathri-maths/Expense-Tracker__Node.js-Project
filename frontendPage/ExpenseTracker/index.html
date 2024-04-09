@@ -32,7 +32,7 @@
       <form id="addExpenses">
         <div>
           <label for="expenseamount">Choose ExpenseAmount:</label>
-          <input type="number" id="expenseamount" required>
+          <input type="number" min="0" id="expenseamount" onkeypress=" return allowPositiveValue(event)" required>
         </div>
         <div>
           <label for="description">Choose description:</label>

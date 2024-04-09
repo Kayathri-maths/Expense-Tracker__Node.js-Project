@@ -10,8 +10,14 @@ icon.addEventListener("click", () => {
     } else {
         document.getElementById("bar").className = "fa-solid fa-bars";
     }
-})
-
+})    
+function allowPositiveValue(event) {
+  if ( event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57)) {
+    return true;
+  }  else {
+    return false;
+  }
+}
   document.getElementById('addExpenses').onsubmit = async function addExpenses(event) {
     try {
         event.preventDefault();
