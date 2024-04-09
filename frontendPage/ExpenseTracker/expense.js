@@ -247,7 +247,7 @@ async function getExpenses(pageNo) {
 
         // Use the page parameter in the request URL
         const response = await axios.get(`http://13.48.123.78:3000/expense/get-expenses?page=${pageNo}&Rows=${Rows}`, {
-            headers: { Authorization: token }
+            headers: { "Authorization": token }
         });
         let parentNode = document.getElementById("expense-table-body");
         parentNode.innerHTML = '';
